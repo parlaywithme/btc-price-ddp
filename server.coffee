@@ -14,7 +14,7 @@ if Meteor.isServer
         else
           Bitcoin.update id,
             $set: 
-              'sell.usd': r.data.subtotal.amount
+              'sell.usd': parseFloat r.data.subtotal.amount
               'sell.updated': new Date()
             
       HTTP.get 'https://api.coinbase.com/v1/prices/buy?qty=1', (e, r) ->
@@ -23,9 +23,9 @@ if Meteor.isServer
         else
           Bitcoin.update id,
             $set:
-              'buy.usd': r.data.subtotal.amount
+              'buy.usd': parseFloat r.data.subtotal.amount
               'buy.updated': new Date()
 
-    , 30 * 1000
+    , 10 * 1000
     
     
